@@ -9,7 +9,7 @@ export default function ProductDetails() {
         add: false
     })
     return (
-        <ScrollView style={{ margin: 10, marginBottom: 80, marginTop: 1 }}>
+        <ScrollView style={{ margin: 10, marginTop: 1 }}>
             <Img
                 style={{ height: Global.HEIGHT - 400, width: Global.WIDTH - 600, }}
                 source={{
@@ -52,7 +52,7 @@ export default function ProductDetails() {
             </View>
             <Text style={{ alignSelf: 'center', fontSize: 18, fontFamily: Global.FONT_BOLD, marginBottom: 10}}>Quantity</Text>
             {
-                state.add ? <View style={{ borderColor: Global.THEME_COLOR, borderWidth: 2, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', width: Global.WIDTH - 300, alignSelf: 'center' }}>
+                state.add ? <View style={{ borderColor: Global.THEME_COLOR, borderWidth: 2, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', width: 120, alignSelf: 'center' }}>
                     <Button full onPress={() => { }} style={{ backgroundColor: null }} transparent>
                         <Text style={{ color: Global.THEME_COLOR }}>-</Text>
                     </Button>
@@ -66,7 +66,7 @@ export default function ProductDetails() {
                         <Text style={{ color: Global.THEME_COLOR }}>+</Text>
                     </Button>
                 </View> :
-                    <Button full onPress={() => setState({ ...state, add: !state.add })} style={{ backgroundColor: null, borderWidth: 2, borderColor: Global.THEME_COLOR, alignSelf: 'center', width: Global.WIDTH - 300 }}>
+                    <Button full onPress={() => setState({ ...state, add: !state.add })} style={{ backgroundColor: null, borderWidth: 2, borderColor: Global.THEME_COLOR, alignSelf: 'center', width: 120 }}>
                         <Text style={{ color: Global.THEME_COLOR, alignSelf: 'center', fontFamily: Global.FONT_REGULAR, fontSize: 15 }}>Add +</Text>
                     </Button>
             }
@@ -82,7 +82,8 @@ const styles = StyleSheet.create({
         fontFamily: Global.FONT_REGULAR,
         fontSize: 18,
         color: Global.GRAY,
-        textAlign: 'center'
+        textAlign: 'center',
+        marginBottom: 30
     },
     sizeHeadingText: {
         fontSize: 20,
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly'
     },
     price: {
-        fontFamily: Global.FONT_BOLD, fontSize: 10,
+        fontFamily: Global.FONT_BOLD,
         fontSize: 25
     },
     discountPrice: {

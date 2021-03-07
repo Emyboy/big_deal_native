@@ -2,11 +2,12 @@ import React from 'react'
 import Header from '../Header/Header'
 
 export default function Layout({
-    children
+    children,
+    nav
 }) {
     return (
         <React.Fragment>
-            <Header />
+            <Header nav={nav}/>
             {children}
         </React.Fragment>
     )

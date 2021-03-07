@@ -10,7 +10,9 @@ export default function Home({
     navigation,
 }) {
     return (
-        <Layout>
+        <Layout
+            nav={navigation}
+        >
             <ScrollView style={{ marginBottom: 10 }}>
                 <View style={{ padding: 3 }}>
                     <ScrollView

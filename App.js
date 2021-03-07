@@ -5,10 +5,14 @@ import { Ionicons } from '@expo/vector-icons';
 import Header from './components/Header/Header';
 import Global from './Global';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './views/Home/Home';
 import ProductDetails from './views/ProductDetails/ProductDetails';
+import Cart from './views/Cart/Cart';
+import Login from './views/Login/Login';
+import AppLoading from './components/AppLoading';
+import Signup from './views/Signup/Signup';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -34,7 +38,20 @@ export default class App extends React.Component {
 
   render() {
     if (!this.state.isReady) {
-      return <Container><Text>Loading..</Text></Container>;
+      return <AppLoading />
+    }
+
+    const headerOptions = {
+      headerStyle: {
+        backgroundColor: Global.THEME_COLOR,
+        borderColor: Global.THEME_COLOR,
+      },
+      headerTitleStyle: {
+        color: 'white',
+        fontFamily: Global.FONT_BOLD,
+        fontSize: 25
+      },
+      headerTintColor: 'white',
     }
 
     return (
@@ -43,7 +60,10 @@ export default class App extends React.Component {
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
-            <Stack.Screen name="Details" component={ProductDetails} />
+            <Stack.Screen name="Details" options={headerOptions} component={ProductDetails} />
+            <Stack.Screen name="Cart" options={headerOptions} component={Cart} />
+            <Stack.Screen name="Login" options={headerOptions} component={Login} />
+            <Stack.Screen name="Signup" options={headerOptions} component={Signup} />
           </Stack.Navigator>
         </NavigationContainer>
       </Container>

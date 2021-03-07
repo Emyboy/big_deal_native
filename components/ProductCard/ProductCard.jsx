@@ -14,7 +14,7 @@ export default function ProductCard({
     return (
         <React.Fragment>
             <Card transparent style={{
-                height: Global.HEIGHT - 420, padding: 10, width: Global.WIDTH - 250,
+                height: Global.HEIGHT - 350, padding: 10, width: 200,
                 backgroundColor: 'white'
             }}
             >
@@ -22,7 +22,8 @@ export default function ProductCard({
                     <Col>
                         <TouchableOpacity onPress={onPress}>
                             <Img
-                                style={{ height: Global.HEIGHT - 600, width: Global.WIDTH - 270, }}
+                                // style={{ height: Global.HEIGHT - 600, width: Global.WIDTH - 270, }}
+                                style={{ height: 200, width: 180 }}
                                 source={{
                                     uri: Global.SHIRT_IMAGE,
                                 }}
@@ -40,7 +41,7 @@ export default function ProductCard({
                             <Text style={{ color: Global.THEME_COLOR, marginLeft: Global.WIDTH - 700, fontFamily: Global.FONT_REGULAR }}>$ 24.05</Text>
                         </View>
                         {
-                            state.add ? <View style={{ borderColor: Global.THEME_COLOR, borderWidth: 2, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', width: Global.WIDTH - 300, alignSelf:'center' }}>
+                            state.add ? <View style={{ borderColor: Global.THEME_COLOR, borderWidth: 2, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', width: 130, marginBottom: 5, alignSelf:'center' }}>
                                 <Button full onPress={() => { }} style={{ backgroundColor: null }} transparent>
                                     <Text style={{ color: Global.THEME_COLOR }}>-</Text>
                                 </Button>
@@ -54,7 +55,7 @@ export default function ProductCard({
                                     <Text style={{ color: Global.THEME_COLOR }}>+</Text>
                                 </Button>
                             </View> :
-                                <Button full onPress={() => setState({ ...state, add: !state.add })} style={{ backgroundColor: null, borderWidth: 2, borderColor: Global.THEME_COLOR, alignSelf: 'center', width: Global.WIDTH - 300 }}>
+                                <Button full onPress={() => setState({ ...state, add: !state.add })} style={{ backgroundColor: null, borderWidth: 2, borderColor: Global.THEME_COLOR, alignSelf: 'center', width: 130, marginBottom: 10 }}>
                                     <Text style={{ color: Global.THEME_COLOR, alignSelf: 'center', fontFamily: Global.FONT_REGULAR, fontSize: 15 }}>Add +</Text>
                                 </Button>
                         }
