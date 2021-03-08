@@ -3,10 +3,12 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import Global from '../../Global'
 
-export default function EachCategory() {
+export default function EachCategory({
+    data
+}) {
     return (
         <Card style={styels.cat}>
-            <Text style={{ fontFamily: Global.FONT_REGULAR, fontSize: 20}}>Shoes and Bags</Text>
+            <Text style={{ fontFamily: Global.FONT_BOLD, fontSize: 20, color: Global.GRAY }}>{data.name}</Text>
         </Card>
     )
 }

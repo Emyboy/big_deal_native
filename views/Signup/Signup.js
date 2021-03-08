@@ -14,7 +14,7 @@ export default ({
         <Content>
             <Form style={styles.form}>
                 <View >
-                    <Text style={styles.heading}>Register</Text>
+                    <Text style={styles.heading}>Signup</Text>
                 </View>
                 <TextInput
                     editable={!state.loading}
@@ -29,7 +29,6 @@ export default ({
                     label='Email'
                     placeholder='Ex. john@mail.com'
                     autoCompleteType='email'
-                    autoFocus={true}
                     keyboardType={'email-address'}
                 />
                 <TextInput
@@ -40,7 +39,7 @@ export default ({
                     secureTextEntry={true}
                 />
                 <Btn
-                    text='Register'
+                    text='Signup'
                     onPress={() => { }}
                     loading={state.loading}
                     style={{

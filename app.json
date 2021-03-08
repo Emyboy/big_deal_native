@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ecolife_native",
-    "slug": "ecolife_native",
+    "name": "Big Deal",
+    "slug": "BigDeal",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,7 +22,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#ff6000"
       },
       "package": "com.bigdeal.emy"
     },

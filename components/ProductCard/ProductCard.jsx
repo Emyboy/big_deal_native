@@ -6,7 +6,8 @@ import { AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function ProductCard({
-    onPress
+    onPress,
+    data
 }) {
     const [state, setState] = useState({
         add: false
@@ -21,24 +22,28 @@ export default function ProductCard({
                 <CardItem cardBody>
                     <Col>
                         <TouchableOpacity onPress={onPress}>
-                            <Img
-                                // style={{ height: Global.HEIGHT - 600, width: Global.WIDTH - 270, }}
-                                style={{ height: 200, width: 180 }}
-                                source={{
-                                    uri: Global.SHIRT_IMAGE,
-                                }}
-                            />
+                            <View style={{ height: 200, width: 200 }}>
+                                <Img
+                                    // style={{ height: Global.HEIGHT - 600, width: Global.WIDTH - 270, }}
+                                    style={{ height: 200, width: 200 }}
+                                    width={100}
+                                    height={200}
+                                    source={{
+                                        uri: data.image_url,
+                                    }}
+                                />
+                            </View>
                             <View style={{ padding: 0, display: 'flex', flexDirection: 'row', marginTop: 10 }}>
                                 <AntDesign name="star" size={20} color={Global.THEME_COLOR} />
                                 <AntDesign name="star" size={20} color={Global.THEME_COLOR} />
                                 <AntDesign name="staro" size={20} color={Global.THEME_COLOR} />
                                 <AntDesign name="staro" size={20} color={Global.THEME_COLOR} />
                             </View>
-                            <Text style={{ color: Global.GRAY, fontFamily: Global.FONT_REGULAR, marginBottom: 10 }}>reader will be distracted.</Text>
+                            <Text style={{ color: Global.GRAY, fontFamily: Global.FONT_REGULAR, marginBottom: 10 }}>{data.name}</Text>
                         </TouchableOpacity>
-                        <View style={{ display: 'flex', flexDirection: 'row', marginBottom: 10 }}>
-                            <Text style={{ textDecorationLine: 'line-through', color: Global.GRAY, fontFamily: Global.FONT_REGULAR }}>$ 56.21</Text>
-                            <Text style={{ color: Global.THEME_COLOR, marginLeft: Global.WIDTH - 700, fontFamily: Global.FONT_REGULAR }}>$ 24.05</Text>
+                        <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 10 }}>
+                            <Text style={{ textDecorationLine: 'line-through', color: Global.GRAY, fontFamily: Global.FONT_REGULAR }}>$ {data.discount_price}.00</Text>
+                            <Text style={{ color: Global.THEME_COLOR, fontFamily: Global.FONT_BOLD }}>$ {data.price}.00</Text>
                         </View>
                         {
                             state.add ? <View style={{ borderColor: Global.THEME_COLOR, borderWidth: 2, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', width: 130, marginBottom: 5, alignSelf:'center' }}>

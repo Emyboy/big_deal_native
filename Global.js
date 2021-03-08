@@ -3,6 +3,7 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 export default {
+    API_URL: 'https://ecolifestrapi.herokuapp.com',
     THEME_COLOR: '#ff6000',
     FONT_BOLD: 'nunito_bold',
     FONT_REGULAR: 'nunito',

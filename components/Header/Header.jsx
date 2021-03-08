@@ -20,7 +20,7 @@ export default (props) => {
                     <AntDesign onPress={() => nav.navigate('Cart')} style={{ color: Global.THEME_COLOR }} name="shoppingcart" size={24} />
                 </Button>
                 <Button transparent>
-                    <AntDesign onPress={() => nav.navigate('Login')} style={{ color: Global.THEME_COLOR }}  name="user" size={24} color="black" />
+                    <AntDesign onPress={() => nav.navigate('Profile')} style={{ color: Global.THEME_COLOR }}  name="user" size={24} color="black" />
                 </Button>
             </Right>
         </Header>

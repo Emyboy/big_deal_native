@@ -62,8 +62,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         display: 'flex',
         flexDirection: 'row',
-        borderWidth: 1,
-        borderColor: Global.GRAY,
+        // borderWidth: 1,
+        // borderColor: Global.GRAY,
         height: 130
     },
     img: {
