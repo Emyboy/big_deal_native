@@ -13,7 +13,8 @@ export default function Textnput({
     autoFocus,
     keyboardType,
     secureTextEntry,
-    editable
+    editable,
+    multiline
 }) {
     return (
         <View style={styles.item}>
@@ -24,10 +25,11 @@ export default function Textnput({
                 style={styles.input}
                 autoFocus={autoFocus}
                 keyboardType={keyboardType}
-                onChangeText={text => { }}
                 secureTextEntry={secureTextEntry}
                 placeholder={placeholder}
                 autoCompleteType={autoCompleteType}
+                multiline={multiline}
+                numberOfLines={10}
             // value={}
             />
         </View>
@@ -53,7 +55,8 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         fontFamily: Global.FONT_REGULAR,
         padding: 7,
-        fontSize: 17
+        fontSize: 17,
+        backgroundColor: 'white'
     },
     label: {
         fontFamily: Global.FONT_REGULAR,

@@ -1,8 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const loadState = () => {
+const loadState = async () => {
     try {
-        const loadedState = AsyncStorage.getItem('state');
+        const loadedState = await AsyncStorage.getItem('state');
+        console.log('LOADING STATE ---', loadState)
         if (loadedState === null) {
             return undefined;
         }
@@ -10,6 +11,14 @@ const loadState = () => {
     } catch (err) {
         return undefined;
     }
+    // AsyncStorage.getItem('state')
+    //     .then(res => {
+    //         // console.log('LOADED --', res)
+    //         return JSON.parse(res)
+    //     })
+    //     .catch(err => {
+    //         return err;
+    //     })
 };
 
 export default loadState;

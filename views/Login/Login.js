@@ -1,15 +1,53 @@
 import React, { useState } from 'react';
-import { Container, Header, Content, Form, Item, Input, Label, Text, View, Button } from 'native-base';
-import { StyleSheet } from 'react-native';
+import { Toast, Content, Form, Text, View, Button } from 'native-base';
+import { StyleSheet, ToastAndroid } from 'react-native';
 import TextInput from '../../components/TextInput/TextInput';
 import Global from '../../Global';
 import Btn from '../../components/Btn/Btn';
-export default ({
-    navigation
+import { connect } from 'react-redux';
+import { login } from "../../redux/actions/auth.action";
+
+const mapDispatch = {
+    Login: login
+}
+
+const mapState = state => ({
+    auth: state.auth
+})
+
+export default connect(
+    mapState,
+    mapDispatch
+)(({
+    navigation,
+    auth,
+    Login
 }) => {
     const [state, setState] = useState({
         loading: false
+    });
+
+    const [data, setData] = useState({
+        identifier: null,
+        password: null
     })
+
+    const handleSubmit = () => {
+        console.log(data);
+        if (data.identifier && data.password) {
+            Login(data);
+        }else {
+            ToastAndroid.showWithGravityAndOffset(
+                "Please Fill Out The Form",
+                ToastAndroid.LONG,
+                ToastAndroid.BOTTOM,
+                25,
+                50
+            );
+
+        }
+    }
+
     return (
         <Content>
             <Form style={styles.form}>
@@ -17,7 +55,11 @@ export default ({
                     <Text style={styles.heading}>Login</Text>
                 </View>
                 <TextInput
-                    editable={!state.loading}
+                    onChangeText={e => setData({
+                        ...data,
+                        identifier: e
+                    })}
+                    editable={!auth.loading}
                     label='Email / Username'
                     placeholder='Ex. john@mail.com'
                     autoCompleteType='email'
@@ -25,7 +67,11 @@ export default ({
                     keyboardType={'email-address'}
                 />
                 <TextInput
-                    editable={!state.loading}
+                    onChangeText={e => setData({
+                        ...data,
+                        password: e
+                    })}
+                    editable={!auth.loading}
                     label='Password'
                     placeholder='* * * * * * *'
                     autoCompleteType='password'
@@ -33,8 +79,8 @@ export default ({
                 />
                 <Btn
                     text='Login'
-                    onPress={() => { }}
-                    loading={state.loading}
+                    onPress={() => handleSubmit()}
+                    loading={auth.loading}
                     style={{
                         alignSelf: 'center',
                         width: Global.WIDTH - 40
@@ -46,7 +92,7 @@ export default ({
             </Form>
         </Content>
     );
-}
+});
 
 const styles = StyleSheet.create({
     form: {

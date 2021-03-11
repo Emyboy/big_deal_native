@@ -11,7 +11,7 @@ export default function Btn({
     disabled
 }) {
     return (
-        <Button disabled={disabled || loading} full onPress={onPress} style={{ ...styles.btn, ...style }}>
+        <Button disabled={disabled || loading} full onPress={() => onPress()} style={{ ...styles.btn, ...style }}>
             {
                 loading ? <Spinner color='white' />
                     : <Text style={styles.btnText}>{text}</Text>

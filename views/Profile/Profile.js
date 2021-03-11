@@ -1,31 +1,49 @@
 import { Text, View } from 'native-base'
 import React from 'react'
 import { Image, ScrollView, StyleSheet } from 'react-native'
+import { connect } from 'react-redux';
 import Btn from '../../components/Btn/Btn'
-import Global from '../../Global'
+import Global from '../../Global';
+import { logout } from '../../redux/actions/auth.action'
 
-export default function Profile({
-    navigation
-}) {
+const mapState = state => ({
+    auth: state.auth
+})
+
+const mapDispatch = {
+    Logout: logout
+}
+
+export default connect(
+    mapState,
+    mapDispatch,
+)(({
+    navigation,
+    Logout,
+    auth
+}) => {
+    const { userData } = auth;
     return (
         <ScrollView style={{margin: 20 }}>
-            <View style={styles.avatar}>
-                <Image
-                    style={{ height: 150, width: 150 }}
-                    source={{
-                        uri: 'http://formatoselectronicos.com/Dashboard/modern/resources/images/icon_user_cancel.png',
-                    }}
+            {userData ? <>
+                <View style={styles.avatar}>
+                    <Image
+                        style={{ height: 150, width: 150 }}
+                        source={{
+                            uri: 'http://formatoselectronicos.com/Dashboard/modern/resources/images/icon_user_cancel.png',
+                        }}
+                    />
+                </View>
+                <Text style={styles.username}>{userData.user.username}</Text>
+                <Text style={styles.email}>{userData.user.email}</Text>
+                <Btn
+                    text='Logout'
+                    onPress={() => Logout()}
                 />
-            </View>
-            <Text style={styles.username}>Username</Text>
-            <Text style={styles.email}>Email@mail.com</Text>
-            <Btn 
-                text='Logout'
-                onPress={() => navigation.navigate('Login')}
-            />
+            </>:null}
         </ScrollView>
     )
-}
+})
 
 
 const styles = StyleSheet.create({

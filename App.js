@@ -1,26 +1,22 @@
 import React from 'react';
-import { Container, Text, View } from 'native-base';
+import { Container } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import Global from './Global';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import Home from './views/Home/Home';
-import ProductDetails from './views/ProductDetails/ProductDetails';
-import Cart from './views/Cart/Cart';
-import Login from './views/Login/Login';
+import { NavigationContainer } from '@react-navigation/native';
 import AppLoading from './components/AppLoading';
-import Signup from './views/Signup/Signup';
-import Profile from './views/Profile/Profile';
 import { Provider } from 'react-redux';
-import store from './redux/store/store'
+import store from './redux/store'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Checkout from './views/Checkout/Checkout';
+import Router from './Router';
 
-
-const Drawer = createDrawerNavigator();
-const Stack = createStackNavigator();
+store.subscribe(() => {
+  AsyncStorage.setItem('view', JSON.stringify(store.getState().view))
+  AsyncStorage.setItem('auth', JSON.stringify(store.getState().auth))
+  // console.log('change has happened VIEW ---', JSON.stringify(store.getState().view))
+  console.log('--------------------------------------------')
+  console.log('change has happened AUTH ---', JSON.stringify(store.getState().auth))
+})
 
 export default class App extends React.Component {
   constructor(props) {
@@ -30,18 +26,23 @@ export default class App extends React.Component {
     };
   }
 
-
   async componentDidMount() {
-    try {
-      const view = await AsyncStorage.getItem('view')
-      console.log('storing ---', view);
-      store.dispatch({
-        type: 'SET_VIEW_STATE',
-        payload: JSON.parse(view)
+    AsyncStorage.getItem('state')
+      .then(res => {
+        store.dispatch({
+          type: 'SET_VIEW_STATE',
+          payload: JSON.parse(res).view
+        })
       })
-    } catch (error) {
-      console.log(error)
-    }
+    AsyncStorage.getItem('auth')
+      .then(res => {
+        store.dispatch({
+          type: 'SET_AUTH_STATE',
+          payload: JSON.parse(res).auth
+        })
+      })
+    const state = await AsyncStorage.getItem('auth')
+    console.log('FETCH STATE ---', state)
     await Font.loadAsync({
       Roboto: require('native-base/Fonts/Roboto.ttf'),
       Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
@@ -57,33 +58,12 @@ export default class App extends React.Component {
       return <AppLoading />
     }
 
-    const headerOptions = {
-      headerStyle: {
-        backgroundColor: Global.THEME_COLOR,
-        borderColor: Global.THEME_COLOR,
-      },
-      headerTitleStyle: {
-        color: 'white',
-        fontFamily: Global.FONT_BOLD,
-        fontSize: 25
-      },
-      headerTintColor: 'white',
-    }
-
     return (
       <Provider store={store}>
         <Container style={{ backgroundColor: Global.BG_COLOR }}>
           {/* <Header /> */}
           <NavigationContainer>
-            <Stack.Navigator>
-              {/* <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
-              <Stack.Screen name="Details" options={headerOptions} component={ProductDetails} />
-              <Stack.Screen name="Login" options={headerOptions} component={Login} />
-              <Stack.Screen name="Signup" options={headerOptions} component={Signup} />
-              <Stack.Screen name="Profile" options={headerOptions} component={Profile} />
-              <Stack.Screen name="Cart" options={headerOptions} component={Cart} /> */}
-              <Stack.Screen name="Checkout" options={headerOptions} component={Checkout} />
-            </Stack.Navigator>
+            <Router />
           </NavigationContainer>
         </Container>
       </Provider>

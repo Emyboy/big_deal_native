@@ -9,7 +9,7 @@ const initialState = {
 }
 
 export default (state = initialState, { type, payload }) => {
-    AsyncStorage.setItem('view', JSON.stringify(state))
+    // AsyncStorage.setItem('view', JSON.stringify(state))
     switch (type) {
 
         case 'SET_VIEW_STATE':

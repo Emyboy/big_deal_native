@@ -6,7 +6,7 @@ import Heading from '../../components/Heading/Heading';
 import { Container, Text, View } from 'native-base';
 import Layout from '../../components/Layout/Layout';
 import { connect } from 'react-redux';
-import { getAllCategories } from '../../redux/actions/view.action';
+import { getItAll, } from '../../redux/actions/view.action';
 import axios from 'axios';
 import Global from '../../Global';
 import Btn from '../../components/Btn/Btn'
@@ -17,7 +17,7 @@ const mapState = state => ({
 })
 
 const mapAction = {
-    GetAllCategories: getAllCategories
+    GetItAll: getItAll
 }
 
 export default connect(
@@ -26,7 +26,7 @@ export default connect(
 )(({
     view,
     navigation,
-    GetAllCategories
+    GetItAll
 }) => {
 
     const [state, setState] = useState({
@@ -49,7 +49,7 @@ export default connect(
 
     useEffect(() => {
         getProducts()
-        GetAllCategories();
+        GetItAll();
     }, [])
     // console.log('VIEW -', view)
     return (
@@ -77,8 +77,12 @@ export default connect(
                         horizontal
                     >
                         {
-                            state.products.map((val, i) => {
-                                return <ProductCard key={i} data={val} />
+                            view.products.map((val, i) => {
+                                return <ProductCard
+                                    key={i}
+                                    onPress={() => navigation.navigate('Details')}
+                                    data={val}
+                                />
                             })
                         }
                     </ScrollView>
@@ -95,7 +99,7 @@ export default connect(
                     </Text>
                     <Btn
                         text='Create Store'
-                        onPress={() => { }}
+                        onPress={() => navigation.navigate('CreateStore')}
                         style={{
                             marginTop: 0,
                             width: Global.WIDTH - 100,

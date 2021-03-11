@@ -3,11 +3,12 @@ import Header from '../Header/Header'
 
 export default function Layout({
     children,
-    nav
+    nav,
+    back
 }) {
     return (
         <React.Fragment>
-            <Header nav={nav}/>
+            <Header nav={nav} back={back}/>
             {children}
         </React.Fragment>
     )
