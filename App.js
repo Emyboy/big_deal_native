@@ -1,21 +1,73 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { View } from 'react-native';
+import { DefaultTheme, Provider as PaperProvider, Text, Button, TextInput } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import Header from './components/Header/Header';
+import Global from './Global'
+import { Provider } from 'react-redux';
+import store from './redux/store'
+import Router from './Router';
+import * as Font from 'expo-font';
+import AppLoading from './components/AppLoading';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+
+const theme = {
+  ...DefaultTheme,
+  roundness: 2,
+  colors: {
+    ...DefaultTheme.colors,
+    // primary: Global.THEME_COLOR,
+    // accent: Global.THEME_COLOR,
+  },
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isReady: false,
+    };
+  }
+
+  async componentDidMount() {
+    // AsyncStorage.getItem('state')
+    //   .then(res => {
+    //     store.dispatch({
+    //       type: 'SET_VIEW_STATE',
+    //       payload: JSON.parse(res).view
+    //     })
+    //   })
+    // AsyncStorage.getItem('auth')
+    //   .then(res => {
+    //     store.dispatch({
+    //       type: 'SET_AUTH_STATE',
+    //       payload: JSON.parse(res).auth
+    //     })
+    //   })
+    // const state = await AsyncStorage.getItem('auth')
+    // console.log('FETCH STATE ---', state)
+    await Font.loadAsync({
+      nunito: require('./assets/fonts/NunitoSans-Regular.ttf'),
+      nunito_bold: require('./assets/fonts/NunitoSans-Bold.ttf'),
+      // ...Ionicons.font,
+    });
+    this.setState({ isReady: true });
+  }
+
+  render() {
+    if (!this.state.isReady) {
+      return <AppLoading />
+    }
+
+    return (
+      <Provider store={store}>
+        <PaperProvider theme={theme}>
+          <Header />
+          <NavigationContainer>
+            <Router />
+          </NavigationContainer>
+        </PaperProvider>
+      </Provider>
+    );
+  }
+}
