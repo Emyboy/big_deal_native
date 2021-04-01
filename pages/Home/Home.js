@@ -10,7 +10,7 @@ import Header from '../../components/Header/Header'
 export default function Home() {
     return (
         <View style={{ height: Global.HEIGHT + 30 }}>
-            <Header type='search' />
+            <Header/>
             <Card>
                 <Card.Content style={{ display: 'flex', flexDirection: 'row' }}>
                     <ScrollView horizontal>

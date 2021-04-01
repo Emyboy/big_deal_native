@@ -9,7 +9,8 @@ import SearchInput from '../SearchInput/SearchInput';
 import { Feather } from '@expo/vector-icons';
 
 const Header = ({
-    type
+    type,
+    back
 }) => {
     const _goBack = () => console.log('Went back');
 
@@ -32,7 +33,7 @@ const Header = ({
             case 'back':
                 return <Card.Content style={{ ...styles.header, justifyContent: 'space-between' }}>
                     <View style={{ marginRight: 10 }}>
-                        <Ionicons style={styles.icon} name="chevron-back" size={24} color={Global.THEME_COLOR} />
+                        <Ionicons onPress={back} style={styles.icon} name="chevron-back" size={30} color={Global.THEME_COLOR} />
                     </View>
                     <View style={{ alignItems: 'center' }}>
                         <Text style={{ fontFamily: Global.FONT_REGULAR, color: Global.GRAY_TEXT }}>Name Of The Product</Text>
@@ -43,11 +44,11 @@ const Header = ({
                     </View>
                 </Card.Content>
             default:
-                return <Card.Content style={styles.header}>
+                return <Card.Content style={{...styles.header, justifyContent: 'space-between'}}>
                     <Entypo name="menu" size={24} color={Global.THEME_COLOR} />
                     <View style={{ display: 'flex', flexDirection: 'row' }}>
-                        <AntDesign name="shoppingcart" size={24} color="black" />
-                        <AntDesign name="user" size={24} color="black" style={{ marginLeft: 15 }} />
+                        <AntDesign name="shoppingcart" size={24} color={"black"} />
+                        <AntDesign name="user" size={24} color={"black"} style={{ marginLeft: 15 }} />
                     </View>
                 </Card.Content>
         }
@@ -64,11 +65,11 @@ const Header = ({
     //         paddingLeft: 10,
     //         paddingRight: 10
     //     }}>
-    //         <Entypo name="menu" size={24} color="black" />
+    //         <Entypo name="menu" size={24} color={"black"} />
     //         {/* <Text>hi</Text> */}
     //         <View style={{ display: 'flex', flexDirection: 'row' }}>
-    //             <AntDesign name="shoppingcart" size={24} color="black" />
-    //             <AntDesign name="user" size={24} color="black" style={{ marginLeft: 15 }} />
+    //             <AntDesign name="shoppingcart" size={24} color={"black"} />
+    //             <AntDesign name="user" size={24} color={"black"} style={{ marginLeft: 15 }} />
     //         </View>
     //     </Appbar.Header>
     // );

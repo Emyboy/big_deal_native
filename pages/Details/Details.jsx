@@ -6,102 +6,115 @@ import Btn from '../../components/Btn/Btn'
 import Header from '../../components/Header/Header'
 import Global from '../../Global'
 import { AntDesign } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+// const Tab = createBottomTabNavigator();
 
 export default function Details() {
+    const navigation = useNavigation();
     const [state, setState] = useState({
         display: 'product'
     })
     return (
         <View>
-            <Header type='back' />
-            <View>
-                <ScrollView>
-                    <View style={{ backgroundColor: 'white', padding: 10 }}>
-                        <Image
-                            width={90}
-                            height={90}
-                            style={{ alignSelf: 'center', width: 230, height: 230, borderRadius: 20 }}
-                            source={{ uri: Global.SHIRT_IMAGE }}
-                        />
+            <Header type='back' back={() => navigation.goBack()}/>
+            <ScrollView style={{ height: Global.HEIGHT - 135 }}>
+                <View style={{ backgroundColor: 'white', padding: 10 }}>
+                    <Image
+                        width={90}
+                        height={90}
+                        style={{ alignSelf: 'center', width: 230, height: 230, borderRadius: 20 }}
+                        source={{ uri: Global.SHIRT_IMAGE }}
+                    />
+                </View>
+                <Card style={{ backgroundColor: Global.GRAY, marginTop: 20, elevation: 0 }}>
+                    <View style={styles.tab}>
+                        <TouchableOpacity onPress={() => setState({ ...state, display: 'product' })}>
+                            <Card style={styles.tabBtn}>
+                                <Text style={{ ...styles.tagBtnText, color: state.display === 'product' ? Global.THEME_COLOR : 'black' }}>Product</Text>
+                            </Card>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => setState({ ...state, display: 'details' })}>
+                            <Card style={styles.tabBtn}>
+                                <Text style={{ ...styles.tagBtnText, color: state.display === 'details' ? Global.THEME_COLOR : 'black' }}>Details</Text>
+                            </Card>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => setState({ ...state, display: 'reviews' })}>
+                            <Card style={styles.tabBtn}>
+                                <Text style={{ ...styles.tagBtnText, color: state.display === 'reviews' ? Global.THEME_COLOR : 'black' }}>Reviews</Text>
+                            </Card>
+                        </TouchableOpacity>
                     </View>
-                    <Card style={{ backgroundColor: Global.GRAY, marginTop: 20 }}>
-                        <View style={styles.tab}>
-                            <TouchableOpacity onPress={() => setState({ ...state, display: 'product' })}>
-                                <Card style={styles.tabBtn}>
-                                    <Text style={{ ...styles.tagBtnText, color: state.display === 'product' ? Global.THEME_COLOR : 'black' }}>Product</Text>
-                                </Card>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => setState({ ...state, display: 'details' })}>
-                                <Card style={styles.tabBtn}>
-                                    <Text style={{ ...styles.tagBtnText, color: state.display === 'details' ? Global.THEME_COLOR : 'black' }}>Details</Text>
-                                </Card>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => setState({ ...state, display: 'reviews' })}>
-                                <Card style={styles.tabBtn}>
-                                    <Text style={{ ...styles.tagBtnText, color: state.display === 'reviews' ? Global.THEME_COLOR : 'black' }}>Reviews</Text>
-                                </Card>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{ marginTop: 20, marginBottom: 30 }}>
-                            {
-                                state.display === 'details' ? <Card.Content>
-                                    <Text style={styles.des}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Excepturi, odit voluptate architecto, nobis doloribus pariatur illum exercitationem vel officia voluptas hic repellat perferendis, dignissimos laudantium nostrum velit id saepe nam?</Text>
-                                    <Btn text='Add To Cart' style={{ width: Global.WIDTH - 100, alignSelf: 'center' }} />
-                                </Card.Content> : null
-                            }
-                            {
-                                state.display === 'product' ? <Card.Content>
-                                    <Text style={styles.heading}>SELECT COLOR</Text>
-                                    <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: 10 }}>
-                                        <View style={{ ...styles.circle, backgroundColor: '#fe8c68', shadowColor: '#fe8c68' }}></View>
-                                        <View style={{ ...styles.circle, backgroundColor: '#f04d98' }}><AntDesign name="checkcircleo" size={24} color='white' /></View>
-                                        <View style={{ ...styles.circle, backgroundColor: '#67b5f7' }}></View>
-                                        <View style={{ ...styles.circle, backgroundColor: '#3e3a39' }}></View>
-                                    </View>
-                                    <Text style={{...styles.heading, marginTop: 20 }}>SELECT SIZE UK</Text>
-                                    <ScrollView horizontal style={{ height: 90 }}>
-                                        <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: 10, height: 70 }}>
-                                            <Card style={styles.eachSize}>
-                                                <Text style={styles.sizeText}>4.5</Text>
-                                            </Card>
-                                            <Card style={styles.eachSizeActive}>
-                                                <Text style={styles.sizeTextActive}>4.5</Text>
-                                            </Card>
-                                            <Card style={styles.eachSize}>
-                                                <Text style={styles.sizeText}>4.5</Text>
-                                            </Card>
-                                            <Card style={styles.eachSize}>
-                                                <Text style={styles.sizeText}>4.5</Text>
-                                            </Card>
+                    <View style={{ marginTop: 20, }}>
+                        {
+                            state.display === 'details' ? <Card.Content>
+                                <Text style={styles.des}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Excepturi, odit voluptate architecto, nobis doloribus pariatur illum exercitationem vel officia voluptas hic repellat perferendis, dignissimos laudantium nostrum velit id saepe nam?</Text>
+                                <Btn text='Add To Cart' style={{ width: Global.WIDTH - 100, alignSelf: 'center' }} />
+                            </Card.Content> : null
+                        }
+                        {
+                            state.display === 'product' ? <Card.Content>
+                                <Text style={styles.heading}>SELECT COLOR</Text>
+                                <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: 10 }}>
+                                    <View style={{ ...styles.circle, backgroundColor: '#fe8c68', shadowColor: '#fe8c68' }}></View>
+                                    <View style={{ ...styles.circle, backgroundColor: '#f04d98' }}><AntDesign name="checkcircleo" size={24} color='white' /></View>
+                                    <View style={{ ...styles.circle, backgroundColor: '#67b5f7' }}></View>
+                                    <View style={{ ...styles.circle, backgroundColor: '#3e3a39' }}></View>
+                                </View>
+                                <Text style={{ ...styles.heading, marginTop: 20 }}>SELECT SIZE UK</Text>
+                                <ScrollView horizontal style={{ height: 90 }}>
+                                    <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: 10, height: 70 }}>
+                                        <Card style={styles.eachSize}>
+                                            <Text style={styles.sizeText}>4.5</Text>
+                                        </Card>
+                                        <Card style={styles.eachSizeActive}>
+                                            <Text style={styles.sizeTextActive}>4.5</Text>
+                                        </Card>
+                                        <Card style={styles.eachSize}>
+                                            <Text style={styles.sizeText}>4.5</Text>
+                                        </Card>
+                                        <Card style={styles.eachSize}>
+                                            <Text style={styles.sizeText}>4.5</Text>
+                                        </Card>
 
-                                            <Card style={styles.eachSize}>
-                                                <Text style={styles.sizeText}>4.5</Text>
-                                            </Card>
-                                        </View>
-                                    </ScrollView>
-                                </Card.Content> : null
-                            }
-                        </View>
-                        <View style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', padding: 20 }}>
-                            <AntDesign name="hearto" size={30} color="black" style={{ marginTop: 10 }} />
-                            <AntDesign name="heart" size={30} color={Global.THEME_COLOR} style={{ marginTop: 10 }} />
-                            <Button style={styles.cartBtn}>
-                                <Text style={{ color: 'white', fontFamily: Global.FONT_BOLD, fontSize: 15 }}>ADD TO CART</Text>
-                            </Button>
-                        </View>
-                    </Card>
-                </ScrollView>
+                                        <Card style={styles.eachSize}>
+                                            <Text style={styles.sizeText}>4.5</Text>
+                                        </Card>
+                                    </View>
+                                </ScrollView>
+                            </Card.Content> : null
+                        }
+                    </View>
+                </Card>
+            </ScrollView>
+            <View style={styles.footer}>
+                <AntDesign name="hearto" size={30} color="black" style={{ marginTop: 10 }} />
+                <AntDesign name="heart" size={30} color={Global.THEME_COLOR} style={{ marginTop: 10 }} />
+                <View style={styles.cartBtn}>
+                    <Text style={{ color: 'white', fontFamily: Global.FONT_BOLD, fontSize: 17, marginTop: 15, marginLeft: 25, fontWeight: 'bold' }}>ADD TO CART</Text>
+                    <View style={{ ...styles.circle, backgroundColor: 'white', elevation: 0 }}><AntDesign name="right" size={24} color={Global.THEME_COLOR} /></View>
+                </View>
             </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    footer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        padding: 10,
+        backgroundColor: 'white',
+    },
     cartBtn: {
         backgroundColor: Global.THEME_COLOR,
-        borderRadius: 20,
-        padding: 10,
-        // width: Global.WIDTH - 100
+        borderRadius: 30,
+        width: 200,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     title: {
         textAlign: 'center',
@@ -121,11 +134,12 @@ const styles = StyleSheet.create({
     },
     tabBtn: {
         margin: 5,
-        borderRadius: 10
+        borderRadius: 15,
+        elevation: 0
     },
     tagBtnText: {
         padding: 8,
-        fontFamily: Global.FONT_REGULAR
+        fontFamily: Global.FONT_REGULAR,
     },
     heading: {
         fontFamily: Global.FONT_REGULAR,
