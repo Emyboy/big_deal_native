@@ -39,7 +39,7 @@ export default connect(
     return (
         <Stack.Navigator>
             <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
-            <Stack.Screen options={{ headerShown: false }} name="Details" component={Details} />
+            <Stack.Screen options={{ headerShown: false,headerTitle: false, headerStyle: { backgroundColor: Global.THEME_COLOR } }} name="Details" component={Details} />
         </Stack.Navigator>
     )
 })

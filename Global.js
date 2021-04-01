@@ -9,7 +9,8 @@ export default {
     FONT_REGULAR: 'nunito',
     WIDTH: windowWidth,
     HEIGHT: windowHeight,
-    SHIRT_IMAGE: 'https://contents.mediadecathlon.com/p1484240/k$ab565f3675dbdd7e3c486175e2c16583/men-s-travel-trekking-shirt-travel100-warm-bordeaux.jpg?&f=x',
+    SHIRT_IMAGE: 'https://purepng.com/public/uploads/large/purepng.com-t-shirtt-shirtfabrict-shapegramnets-1421526429337ircsl.png',
     BG_COLOR: '#f2f2f2',
-    GRAY: '#777'
+    GRAY_TEXT: '#777',
+    GRAY: '#f0f1f3'
 }

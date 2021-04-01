@@ -62,7 +62,6 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <PaperProvider theme={theme}>
-          <Header />
           <NavigationContainer>
             <Router />
           </NavigationContainer>
