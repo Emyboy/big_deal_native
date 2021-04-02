@@ -28,7 +28,8 @@ export default function Btn({
 
 const styles = StyleSheet.create({
     btn: {
-        backgroundColor: Global.THEME_COLOR
+        backgroundColor: Global.THEME_COLOR,
+        borderRadius: 100,
     },
     text: {
         fontFamily: Global.FONT_BOLD,

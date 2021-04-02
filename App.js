@@ -59,10 +59,18 @@ export default class App extends React.Component {
       return <AppLoading />
     }
 
+    const MyTheme = {
+      ...DefaultTheme,
+      colors: {
+        ...DefaultTheme.colors,
+        background: Global.BG_COLOR
+      },
+    };
+
     return (
       <Provider store={store}>
         <PaperProvider theme={theme}>
-          <NavigationContainer>
+          <NavigationContainer theme={MyTheme}>
             <Router />
           </NavigationContainer>
         </PaperProvider>

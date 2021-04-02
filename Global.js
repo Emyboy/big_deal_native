@@ -10,7 +10,8 @@ export default {
     WIDTH: windowWidth,
     HEIGHT: windowHeight,
     SHIRT_IMAGE: 'https://purepng.com/public/uploads/large/purepng.com-t-shirtt-shirtfabrict-shapegramnets-1421526429337ircsl.png',
-    BG_COLOR: '#f2f2f2',
+    BG_COLOR: '#f5f6f8',
     GRAY_TEXT: '#777',
-    GRAY: '#f0f1f3'
+    GRAY: '#f0f1f3',
+    BLACK: '#475065',
 }
